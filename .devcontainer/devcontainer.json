@@ -1,0 +1,87 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+  "name": "Ubuntu",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  // THE TAGS (Raak wys): https://mcr.microsoft.com/v2/vscode/devcontainers/base/tags/list
+  // "image": "mcr.microsoft.com/devcontainers/base:noble",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+    // "args": {
+    //     "USERNAME": "vscode",
+    //     "USER_UID": "1000",
+    //     "USER_GID": "1000"
+    // }
+  },
+
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/poetry:2": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "installTools": true,
+      "optimize": true,
+      "version": "os-provided"
+    },
+    "ghcr.io/devcontainers-contrib/features/pylint:2": {
+      "version": "latest"
+    },
+    "ghcr.io/hspaans/devcontainer-features/pytest:1": {
+      "version": "latest",
+      "plugins": "pytest-testinfra"
+    },
+    "ghcr.io/va-h/devcontainers-features/uv:1": {
+      "version": "latest"
+    }
+  },
+  "containerEnv": {
+    "TELEGRAM_CHATBOT_TOKEN": "${localEnv:TELEGRAM_CHATBOT_TOKEN}",
+    "OPENAI_API_KEY": "${localEnv:OPENAI_API_KEY}",
+    "GOOGLE_API_KEY": "${localEnv:GOOGLE_API_KEY}",
+    "GROQ_API_KEY": "${localEnv:GROQ_API_KEY}",
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "files.insertFinalNewline": true,
+        "python.pythonPath": "/root/.cache/pypoetry/virtualenvs/your-project-name-py3.X-pyX.X/bin/python",
+        "python.venvPath": "/root/.cache/pypoetry/virtualenvs"
+      },
+      "extensions": [
+        "aaron-bond.better-comments",
+        "alexcvzz.vscode-sqlite",
+        "Alpha4.jsonl",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "fabiospampinato.vscode-diff",
+        "file-icons.file-icons",
+        "KevinRose.vsc-python-indent",
+        "mhutchie.git-graph",
+        "mikestead.dotenv",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "neptunedesign.vs-sequential-number",
+        "oliversturm.fix-json",
+        "ryu1kn.partial-diff",
+        "sleistner.vscode-fileutils",
+        "vscode-icons-team.vscode-icons",
+        "ms-python.black-formatter",
+        "adrianwilczynski.alpine-js-intellisense",
+        "ms-vscode.sublime-keybindings",
+        "IBM.output-colorizer",
+        "ms-python.isort",
+        "mechatroner.rainbow-csv",
+        "ms-azuretools.vscode-docker",
+        "wmaurer.change-case"
+      ]
+    }
+  },
+  "remoteFileWatcher": {
+    "enabled": true
+  },
+  // "postCreateCommand": "pip install poetry && poetry install",
+  "mounts": []
+}
